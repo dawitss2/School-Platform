@@ -1,0 +1,197 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Add New Student</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/admin/dashboard/main">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">Students</a>
+                        </li>
+                        <li class="breadcrumb-item active">Add</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Add Student</h2>
+                        
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="stdForm" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Student Name</mat-label>
+                                        <input matInput formControlName="sname" (change)="manageallert($event)" required>
+                                        <mat-error *ngIf="stdForm.get('sname').hasError('required')">
+                                            First Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Fathers Name</mat-label>
+                                        <input matInput formControlName="fname" required>
+                                        <mat-error *ngIf="stdForm.get('fname').hasError('required')">
+                                            Fathers Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Grand Fathers Name</mat-label>
+                                        <input matInput formControlName="gfname" required>
+                                        <mat-error *ngIf="stdForm.get('gfname').hasError('required')">
+                                            Fathers Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select formControlName="gender" required>
+                                            <mat-option [value]="'male'">
+                                                Male
+                                            </mat-option>
+                                            <mat-option [value]="'female'">
+                                                Female
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="stdForm.get('gender').hasError('required')">
+                                            Gender is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Gardians Mobile Number 1</mat-label>
+                                        <input matInput formControlName="gmn1" required >
+                                        <mat-error *ngIf="stdForm.get('gmn1').hasError('required')">
+                                            Gardian Mobile Number is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Gardians Mobile Number 2</mat-label>
+                                        <input matInput formControlName="gmn2" >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Select Grade</mat-label>
+                                        <mat-select formControlName="grade" required>
+                                            <mat-option *ngFor="let g of gr" [value]="g.Name">{{g.Name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="stdForm.get('grade').hasError('required')">
+                                            Please select Grade
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-2">
+                                        <mat-label>Select Section</mat-label>
+                                        <mat-select formControlName="section" required>
+                                            <mat-option [value]="'A'">
+                                                A
+                                            </mat-option>
+                                            <mat-option [value]="'B'">
+                                                B
+                                            </mat-option>
+                                            <mat-option [value]="'C'">
+                                                C
+                                            </mat-option>
+                                            <mat-option [value]="'D'">
+                                                D
+                                            </mat-option>
+                                            <mat-option [value]="'E'">
+                                                E
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="stdForm.get('section').hasError('required')">
+                                            Please select Section
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>                              
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Address</mat-label>
+                                        <input matInput formControlName="address" required>
+                                        <mat-error *ngIf="stdForm.get('address').hasError('required')">
+                                             Address is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Kifle Ketema</mat-label>
+                                        <input matInput formControlName="kifleketema" required>
+                                        <mat-error *ngIf="stdForm.get('kifleketema').hasError('required')">
+                                             Kifle Ketema is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Woreda</mat-label>
+                                        <input matInput formControlName="woreda" required>
+                                        <mat-error *ngIf="stdForm.get('woreda').hasError('required')">
+                                             Woreda is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>House Number</mat-label>
+                                        <input matInput formControlName="housenum" required>
+                                        <mat-error *ngIf="stdForm.get('housenum').hasError('required')">
+                                             House Number is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3">
+                                        <mat-label>Upload Image</mat-label>
+                                        <ngx-mat-file-input formControlName="uploadImg" (change)="fileChange($event)">
+                                        </ngx-mat-file-input>
+                                        <mat-icon matSuffix>face</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <button class="btn-space" [disabled]="!stdForm.valid " mat-raised-button
+                                        color="primary">Submit</button>
+                                    <button type="button" mat-button>Cancel</button>
+                                </div>
+                            </div>
+                            <div *ngIf="isShown" _ngcontent-haw-c256="" class="alert alert-success" >You successfully Added a New Student. </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,100 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            {{dialogTitle}}</div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="stdForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Notification ID</mat-label>
+            <input matInput formControlName="NotificationID" required>
+            <mat-icon matSuffix>book</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="Title" required>
+            <mat-icon matSuffix>book</mat-icon>
+            <mat-error *ngIf="stdForm.get('Title').hasError('required')">
+              Notification Title is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="Type" required>
+            <mat-icon matSuffix>book</mat-icon>
+            <mat-error *ngIf="stdForm.get('Type').hasError('required')">
+              Notification Type is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Notice</mat-label>
+            <textarea matInput formControlName="Value" required></textarea>
+            <mat-icon matSuffix>book</mat-icon>
+            <mat-error *ngIf="stdForm.get('Value').hasError('required')">
+              Notification Value is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Grade</mat-label>
+            <mat-select formControlName="GradeName" #mySelect (ngModelChange)='getStudent(mySelect.value)'>
+              <mat-option *ngFor="let g of gr" [value]="g.Name">{{g.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Student</mat-label>
+              <mat-select formControlName="StudentName" #Select (ngModelChange)='getselstu(Select.value)'>
+              <mat-option *ngFor="let s of stu" [value]="s.StudentID">{{s.Name}}</mat-option>
+              </mat-select>
+               <mat-error *ngIf="stdForm.get('StudentName').hasError('required')">
+              Student is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+       <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [type]="submit" [hidden]="isedit" [disabled]="!stdForm.valid" [mat-dialog-close]="1"
+              (click)="assign()">Assign to Student</button>
+              <button mat-raised-button color="warn" [type]="submit" [hidden]="isedit" [mat-dialog-close]="1"
+              (click)="removeassign()" [disabled]="dialogTitle === 'New Notification'">Remove Assigned Student</button>
+            </div>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [type]="submit" [disabled]="!stdForm.valid" [mat-dialog-close]="1"
+              (click)="confirmAdd()">Save</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()"  tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
